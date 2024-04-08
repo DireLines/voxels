@@ -15,6 +15,9 @@ index_3d :: proc(x, y, z: int, dim: int) -> int {
     return x * dim * dim + y * dim + z
 }
 seed :: 0
+get_axis :: proc(key_neg, key_pos: raylib.KeyboardKey) -> f32 {
+    return f32(int(raylib.IsKeyDown(key_pos))) - f32(int(raylib.IsKeyDown(key_neg)))
+}
 main :: proc() {
     using raylib, chunk, light
     SetTraceLogLevel(TraceLogLevel.NONE)
@@ -78,11 +81,11 @@ main :: proc() {
     camera_radius: f32 = 40.0
     for (!WindowShouldClose()) {
         time := f32(GetTime())
-        camera_angle += (f32(int(IsKeyDown(.A))) - f32(int(IsKeyDown(.D)))) * 0.016
-        camera_radius += (f32(int(IsKeyDown(.S))) - f32(int(IsKeyDown(.W)))) * 0.5
+        camera_angle += get_axis(.D, .A) * 0.016
+        camera_radius += get_axis(.W, .S) * 0.5
         camera.position.x = math.cos(camera_angle) * camera_radius
         camera.position.z = math.sin(camera_angle) * camera_radius
-        camera.position.y += (f32(int(IsKeyDown(.E))) - f32(int(IsKeyDown(.Q))))
+        camera.position.y += get_axis(.Q, .E)
         BeginDrawing()
         defer EndDrawing()
         ClearBackground(darkgray)
