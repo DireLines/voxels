@@ -290,7 +290,7 @@ allocate_mesh :: proc(num_faces: int) -> MeshIterator {
     mesh.triangleCount = i32(num_triangles)
     colors := make([]u8, mesh.vertexCount * 4)
     vertices := make([]f32, mesh.vertexCount * 3)
-    normals := make([]f32, mesh.vertexCount * 2)
+    normals := make([]f32, mesh.vertexCount * 3)
     texcoords := make([]f32, mesh.vertexCount * 2)
     mesh.vertices = raw_data(vertices)
     mesh.normals = raw_data(normals)
