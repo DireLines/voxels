@@ -185,7 +185,7 @@ add_cube :: proc(
     block: Voxel,
 ) {
     using raylib, mesh_iterator
-    uvRect := Rectangle{0.25, 0, 0.5, 1}
+    uvRect := Rectangle{0.5, 0, 0.75, 1}
     if (.South in faces) {
         //-z
         normal = {0, 0, -1}

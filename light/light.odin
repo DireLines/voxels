@@ -44,11 +44,11 @@ CreateLight :: proc(
     // TODO: Below code doesn't look good to me, 
     // it assumes a specific shader naming and structure
     // Probably this implementation could be improved
-    enabledName := fmt.tprintf("lights[%s].enabled", currentNumLights)
-    typeName := fmt.tprintf("lights[%s].type", currentNumLights)
-    posName := fmt.tprintf("lights[%s].position", currentNumLights)
-    targetName := fmt.tprintf("lights[%s].target", currentNumLights)
-    colorName := fmt.tprintf("lights[%s].color", currentNumLights)
+    enabledName := fmt.tprintf("lights[%v].enabled", currentNumLights)
+    typeName := fmt.tprintf("lights[%v].type", currentNumLights)
+    posName := fmt.tprintf("lights[%v].position", currentNumLights)
+    targetName := fmt.tprintf("lights[%v].target", currentNumLights)
+    colorName := fmt.tprintf("lights[%v].color", currentNumLights)
 
     light.enabledLoc = GetShaderLocation(shader, strings.clone_to_cstring(enabledName))
     light.typeLoc = GetShaderLocation(shader, strings.clone_to_cstring(typeName))

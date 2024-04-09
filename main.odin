@@ -33,7 +33,7 @@ main :: proc() {
     ClearBackground(BLANK)
     DrawRectangle(0, 0, 16, 16, DARKBROWN)
     DrawRectangle(16, 0, 16, 16, BROWN)
-    DrawRectangle(32, 0, 16, 16, GREEN)
+    DrawRectangle(32, 0, 16, 16, GRAY)
     DrawRectangle(48, 0, 16, 16, GOLD)
     EndTextureMode()
 
@@ -51,8 +51,8 @@ main :: proc() {
     SetShaderValue(shader, ambientLoc, &val, .VEC4)
 
     lights := [4]Light{}
-    lights[0] = CreateLight(.DIRECTIONAL, Vector3{0, 30, 0}, Vector3{-50, 30, -3}, WHITE, shader)
-    lights[1] = CreateLight(.DIRECTIONAL, Vector3{20, 30, 0}, Vector3{2, -30, 5}, GRAY, shader)
+    lights[0] = CreateLight(.POINT, Vector3{70, 0, 0}, Vector3{0, 0, 0}, WHITE, shader)
+    // lights[1] = CreateLight(.DIRECTIONAL, Vector3{20, 30, 0}, Vector3{2, -30, 5}, GRAY, shader)
 
 
     // set the mesh to the correct material/shader
@@ -86,12 +86,18 @@ main :: proc() {
         camera.position.x = math.cos(camera_angle) * camera_radius
         camera.position.z = math.sin(camera_angle) * camera_radius
         camera.position.y += get_axis(.Q, .E)
+        light := lights[0]
+        light.position.x = math.cos(camera_angle * 2) * 40
+        light.position.z = math.sin(camera_angle * 2) * 40
+        light.position.y = camera.position.y
+        UpdateLightValues(shader, light)
+
         BeginDrawing()
         defer EndDrawing()
         ClearBackground(darkgray)
         BeginMode3D(camera)
         defer EndMode3D()
-        DrawGrid(10, 10)
+        DrawGrid(16, 16)
         DrawSphere(Vector3(0), 0.4, GRAY)
         DrawSphere(Vector3{1, 0, 0}, 0.2, RED)
         DrawSphere(Vector3{0, 1, 0}, 0.2, BLUE)
