@@ -89,7 +89,7 @@ main :: proc() {
         light := lights[0]
         light.position.x = math.cos(camera_angle * 2) * 40
         light.position.z = math.sin(camera_angle * 2) * 40
-        light.position.y = camera.position.y
+        light.position.y = 0
         UpdateLightValues(shader, light)
 
         BeginDrawing()
