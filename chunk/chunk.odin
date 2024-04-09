@@ -185,7 +185,7 @@ add_cube :: proc(
     block: Voxel,
 ) {
     using raylib, mesh_iterator
-    uvRect := Rectangle{0.5, 0.5, 0.75, 1}
+    uvRect := Rectangle{0.25, 0, 0.5, 1}
     if (.South in faces) {
         //-z
         normal = {0, 0, -1}
@@ -283,10 +283,11 @@ add_cube :: proc(
         push_vertex(mesh_iterator, position, {0, 0, 1})
     }
 }
-allocate_mesh :: proc(num_triangles: int) -> MeshIterator {
+allocate_mesh :: proc(num_faces: int) -> MeshIterator {
+    num_triangles := num_faces * 2
     mesh := raylib.Mesh{}
-    mesh.vertexCount = i32(num_triangles * 6)
-    mesh.triangleCount = i32(num_triangles * 2)
+    mesh.vertexCount = i32(num_triangles * 3)
+    mesh.triangleCount = i32(num_triangles)
     colors := make([]u8, mesh.vertexCount * 4)
     vertices := make([]f32, mesh.vertexCount * 3)
     normals := make([]f32, mesh.vertexCount * 2)
