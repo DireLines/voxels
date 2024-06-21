@@ -307,7 +307,6 @@ MeshIterator :: struct {
     normal:         raylib.Vector3,
 }
 
-
 spawn_chunk :: proc(
     chunk_index: [3]int,
     seed: i64,
@@ -344,7 +343,7 @@ spawn_chunk :: proc(
                     n = -1 - n
                 }
                 v: Voxel
-                if n > threshold {
+                if n < threshold {
                     v = .Ground
                 } else {
                     v = .Air

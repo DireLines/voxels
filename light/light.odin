@@ -50,11 +50,21 @@ CreateLight :: proc(
     targetName := fmt.tprintf("lights[%v].target", currentNumLights)
     colorName := fmt.tprintf("lights[%v].color", currentNumLights)
 
-    light.enabledLoc = GetShaderLocation(shader, strings.clone_to_cstring(enabledName))
-    light.typeLoc = GetShaderLocation(shader, strings.clone_to_cstring(typeName))
-    light.posLoc = GetShaderLocation(shader, strings.clone_to_cstring(posName))
-    light.targetLoc = GetShaderLocation(shader, strings.clone_to_cstring(targetName))
-    light.colorLoc = GetShaderLocation(shader, strings.clone_to_cstring(colorName))
+    light.enabledLoc = ShaderLocationIndex(
+        GetShaderLocation(shader, strings.clone_to_cstring(enabledName)),
+    )
+    light.typeLoc = ShaderLocationIndex(
+        GetShaderLocation(shader, strings.clone_to_cstring(typeName)),
+    )
+    light.posLoc = ShaderLocationIndex(
+        GetShaderLocation(shader, strings.clone_to_cstring(posName)),
+    )
+    light.targetLoc = ShaderLocationIndex(
+        GetShaderLocation(shader, strings.clone_to_cstring(targetName)),
+    )
+    light.colorLoc = ShaderLocationIndex(
+        GetShaderLocation(shader, strings.clone_to_cstring(colorName)),
+    )
 
     UpdateLightValues(shader, light)
 
